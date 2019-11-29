@@ -82,7 +82,7 @@ class BaseDao(object):
         查询所有
         """
         sql = QueryUtil.selectAll(self.__tableName, self.__columnList)
-        return self.__executeQuery(sql)
+        return self.executeQuery(sql)
 
     def selectByPK(self, value):
         """
@@ -92,7 +92,7 @@ class BaseDao(object):
         if (not value) or (value == ""):
             raise Exception("selectByPrimaryKey() is missing a required paramter 'value'.")
         sql = QueryUtil.selectByPK(self.__primaryKeyDict, value, self.__columnList)
-        result_list = self.__executeQuery(sql)
+        result_list = self.executeQuery(sql)
         if result_list and len(result_list) == 1:
             return result_list[0]
         else:
@@ -113,7 +113,7 @@ class BaseDao(object):
         if (not sql) or sql == "" or len(sql) == 0 or (not isinstance(sql, str)):
             self.__logger.outMsg("Generate sql failed!!!!")
             return 0
-        return self.__executeQuery(sql, logEnable=True)
+        return self.executeQuery(sql, logEnable=True)
 
     def selectAllByPage(self, pageNum=1, limit=10):
         """
@@ -134,7 +134,7 @@ class BaseDao(object):
         if (not page) or (not isinstance(page,Page)):
             raise Exception("Paramter [page] is not correct. Parameter [page] must a Page object instance. ")
         sql = QueryUtil.selectAllByPage(self.__tableName, self.__columnList, page)
-        return self.__executeQuery(sql, logEnable=True)
+        return self.executeQuery(sql, logEnable=True)
 
     def insert(self, obj):
         """
@@ -255,7 +255,7 @@ class BaseDao(object):
                 conn.close()
             pass
 
-    def __executeQuery(self, sql="", logEnable=True):
+    def executeQuery(self, sql="", logEnable=True):
         """
         执行查询 SQL 语句,返回对象数据
         - @Param: sql 执行sql
