@@ -1,11 +1,11 @@
-HOST = "127.0.0.1"
-DATABASE = "money_note"
+HOST = "192.168.222.230"
+DATABASE = "big_data"
 PORT = 3306
 USER = "root"
-PASSWORD = ""
+PASSWORD = "Diyun111#"
 CHARSET = "utf8"
 
 
 TABLE_PREFIX = "t_"
-PACKAGE_NAME ="app"
+PACKAGE_NAME ="code_generator.result"
 
